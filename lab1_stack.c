@@ -34,14 +34,6 @@ int pop(Node** top_ref){
     return (pop_data);
 }
 
-int simile (int arr[], int n, int value){
-    for(int i=0; i<n; i++){
-        if(arr[i]==value){
-            return 1;
-        }
-    }
-    return 0;
-}
 void print_stack (Node* top){
    if (top == NULL) {
         printf("Стек порожній.\n");
@@ -74,18 +66,21 @@ void print_stack (Node* top){
     int* arr = (int*)malloc(n * sizeof(int));
     int arr_count = 0;
 
-    while(top != NULL){
-        int val = pop(&top);
-        push(&tempStack, val);
+    while(top != NULL) {
+        arr[arr_count++] = pop(&top);
     }
 
-    while (tempStack != NULL){
-        int current = pop(&tempStack);
-
-        if(simile(arr,arr_count,current)==0){
-            arr[arr_count++]=current;
-            push(&top,current);
-        }
+    for (int i = arr_count - 1; i >= 0; i--) {
+        int is_duplicate = 0;
+            for (int j = arr_count - 1; j > i; j--) {
+                if (arr[i] == arr[j]) {
+                    is_duplicate = 1;
+                    break;
+                }
+            }
+            if (is_duplicate == 0) {
+                push(&top, arr[i]);
+            }
     }
     printf("\n--- Після видалення дублікатів ---\n");
     print_stack(top);
