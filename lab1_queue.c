@@ -12,13 +12,16 @@ void push(Node** head,Node** tail, int new_data){
         printf("Помилка: не вдалося створити новий елемент\n");
         return ;
     }
+    newNode->data=new_data;
+    newNode->next=NULL;
     if(*(head) == NULL){
         *head=newNode;
         *tail=newNode;
     }
     else{
         newNode->data=new_data;
-        *(tail)->next=newNode;
+        (*tail)->next=newNode;
+        *tail=newNode;
     }
 }
 int pop(Node** head){
@@ -41,7 +44,17 @@ int pop(Node** head){
     printf("Enter the number of elements n: ");
     scanf("%d", &n);
 
-    
+    printf("Enter %d numbers: \n", n);
+
+    for(int i = 0 ; i < n ; i++){
+        scanf("%d", &value);
+        push(&head, &tail, value);
+    }
+    printf("Queue output:");
+    for(int i=0; i<n; i++){
+        printf("%d ", pop(&head));
+    }
+    printf("\n");
 
      return 0;
 }
