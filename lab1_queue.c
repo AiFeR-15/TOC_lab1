@@ -39,7 +39,7 @@ int pop(Node** head){
  int main() {
     Node* head = NULL;
     Node* tail = NULL;
-    int n,value;
+    int n,value,k;
 
     printf("Enter the number of elements n: ");
     scanf("%d", &n);
@@ -50,7 +50,25 @@ int pop(Node** head){
         scanf("%d", &value);
         push(&head, &tail, value);
     }
+
     printf("Queue output:");
+    for(int i=0; i<n; i++){
+        int current=pop(&head);
+        printf("%d ", current);
+        push(&head, &tail, current);
+    }
+    printf("\n");
+
+    printf("Enter the divisor k: ");
+    scanf("%d", &k);
+    for (int i=0;i<n;i++){
+        int new=pop(&head);
+        if(new % k !=0){
+            push(&head, &tail, new);
+        }
+        else n-=1;
+    }
+    printf("Queue output(multiples %d): ", k);
     for(int i=0; i<n; i++){
         printf("%d ", pop(&head));
     }
