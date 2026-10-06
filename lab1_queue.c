@@ -19,7 +19,6 @@ void push(Node** head,Node** tail, int new_data){
         *tail=newNode;
     }
     else{
-        newNode->data=new_data;
         (*tail)->next=newNode;
         *tail=newNode;
     }
