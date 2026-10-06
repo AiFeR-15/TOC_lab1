@@ -24,7 +24,7 @@ void push(Node** head,Node** tail, int new_data){
         *tail=newNode;
     }
 }
-int pop(Node** head){
+int pop(Node** head, Node** tail){
     if(*head == NULL){
         printf("Queue null");
         return -1;
@@ -32,6 +32,11 @@ int pop(Node** head){
     Node* temp= *head;
     int pop_data=temp->data;
     *(head)=(*head)->next;
+
+    if (*head == NULL) {
+        *tail = NULL;
+    }
+
     free(temp);
     return(pop_data);
 }
@@ -53,7 +58,7 @@ int pop(Node** head){
 
     printf("Queue output:");
     for(int i=0; i<n; i++){
-        int current=pop(&head);
+        int current=pop(&head,&tail);
         printf("%d ", current);
         push(&head, &tail, current);
     }
@@ -61,16 +66,17 @@ int pop(Node** head){
 
     printf("Enter the divisor k: ");
     scanf("%d", &k);
-    for (int i=0;i<n;i++){
-        int new=pop(&head);
+    int original_n = n;
+    for (int i=0;i<original_n;i++){
+        int new=pop(&head,&tail);
         if(new % k !=0){
             push(&head, &tail, new);
         }
-        else n-=1;
+        else n=n-1;
     }
     printf("Queue output(multiples %d): ", k);
     for(int i=0; i<n; i++){
-        printf("%d ", pop(&head));
+        printf("%d ", pop(&head,&tail));
     }
     printf("\n");
 
