@@ -114,7 +114,7 @@ int main(){
                 break;
             case 4:
                 printf("Вихід з меню!");
-                break;
+                return 0;
         }
     }
     return 0;
